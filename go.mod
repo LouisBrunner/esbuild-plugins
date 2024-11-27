@@ -3,7 +3,7 @@ module github.com/LouisBrunner/esbuild-plugins
 go 1.22.1
 
 require (
-	github.com/evanw/esbuild v0.21.5
+	github.com/evanw/esbuild v0.24.0
 	github.com/t-yuki/gocover-cobertura v0.0.0-20180217150009-aaee18c8195c
 	gotest.tools/gotestsum v1.12.0
 	honnef.co/go/tools v0.5.1
