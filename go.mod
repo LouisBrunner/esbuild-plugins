@@ -4,6 +4,7 @@ go 1.22.1
 
 require (
 	github.com/evanw/esbuild v0.24.2
+	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
 	github.com/t-yuki/gocover-cobertura v0.0.0-20180217150009-aaee18c8195c
 	gotest.tools/gotestsum v1.12.0
 	honnef.co/go/tools v0.5.1
@@ -15,7 +16,6 @@ require (
 	github.com/dnephin/pflag v1.0.7 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
-	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	golang.org/x/exp/typeparams v0.0.0-20231108232855-2478ac86f678 // indirect
