@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.24.1
 
 require (
-	github.com/evanw/esbuild v0.25.11
+	github.com/evanw/esbuild v0.27.0
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
 	github.com/t-yuki/gocover-cobertura v0.0.0-20180217150009-aaee18c8195c
 	gotest.tools/gotestsum v1.13.0
