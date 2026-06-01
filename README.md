@@ -54,6 +54,8 @@ Options include:
 package main
 
 import (
+  "os"
+
   "github.com/evanw/esbuild/pkg/api"
   "github.com/LouisBrunner/esbuild-plugins/pkg/cssmodules"
 )

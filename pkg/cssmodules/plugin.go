@@ -74,7 +74,7 @@ func NewPlugin(opts Options) api.Plugin {
 					return api.OnLoadResult{Errors: []api.Message{{Text: fmt.Sprintf("failed to marshal CSS module mappings for %s: %v", args.Path, err)}}}, nil
 				}
 
-				opts.Logger.Printf("Loaded CSS module %s with prefix %q and classes: %s\n", args.Path, localPrefix, slices.Collect(maps.Keys(mappings)))
+				opts.Logger.Printf("Loaded CSS module %s with prefix %q and classes: %v\n", args.Path, localPrefix, slices.Collect(maps.Keys(mappings)))
 				wrapper := fmt.Sprintf("import %q;\nexport default %s;", args.Path+"?raw", mappingsJSON)
 				return api.OnLoadResult{Contents: &wrapper, Loader: api.LoaderJS}, nil
 			})
