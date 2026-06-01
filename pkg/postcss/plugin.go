@@ -11,6 +11,7 @@ import (
 type Options struct {
 	Filter  string
 	Command string
+	Loader  func(string) api.Loader
 }
 
 func Must(plugin *api.Plugin, err error) api.Plugin {
@@ -26,6 +27,11 @@ func NewPlugin(opts Options) (*api.Plugin, error) {
 	}
 	if opts.Command == "" {
 		opts.Command = "npx postcss"
+	}
+	if opts.Loader == nil {
+		opts.Loader = func(path string) api.Loader {
+			return api.LoaderCSS
+		}
 	}
 
 	cmdParts, err := shlex.Split(opts.Command)
@@ -53,7 +59,7 @@ func NewPlugin(opts Options) (*api.Plugin, error) {
 					contents := string(res)
 					return api.OnLoadResult{
 						Contents: &contents,
-						Loader:   api.LoaderCSS,
+						Loader:   opts.Loader(args.Path),
 						WatchFiles: []string{
 							args.Path,
 						},
