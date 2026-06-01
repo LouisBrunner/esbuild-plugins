@@ -15,16 +15,11 @@ import (
 	"github.com/evanw/esbuild/pkg/api"
 )
 
+const rawSuffix = "?css-modules-raw"
+
 type Options struct {
 	Filter string
 	Logger *log.Logger
-}
-
-func Must(plugin *api.Plugin, err error) api.Plugin {
-	if err != nil {
-		panic(err)
-	}
-	return *plugin
 }
 
 func NewPlugin(opts Options) api.Plugin {
@@ -75,12 +70,12 @@ func NewPlugin(opts Options) api.Plugin {
 				}
 
 				opts.Logger.Printf("Loaded CSS module %s with prefix %q and classes: %v\n", args.Path, localPrefix, slices.Collect(maps.Keys(mappings)))
-				wrapper := fmt.Sprintf("import %q;\nexport default %s;", args.Path+"?raw", mappingsJSON)
+				wrapper := fmt.Sprintf("import %q;\nexport default %s;", args.Path+rawSuffix, mappingsJSON)
 				return api.OnLoadResult{Contents: &wrapper, Loader: api.LoaderJS}, nil
 			})
 
-			pb.OnResolve(api.OnResolveOptions{Filter: `.*\.module\.css\?raw$`}, func(args api.OnResolveArgs) (api.OnResolveResult, error) {
-				orig := strings.TrimSuffix(args.Path, "?raw")
+			pb.OnResolve(api.OnResolveOptions{Filter: rawSuffix + `$`}, func(args api.OnResolveArgs) (api.OnResolveResult, error) {
+				orig := strings.TrimSuffix(args.Path, rawSuffix)
 				return api.OnResolveResult{Path: orig, Namespace: "file"}, nil
 			})
 		},
