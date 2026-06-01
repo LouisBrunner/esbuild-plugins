@@ -25,9 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Test
     permissions:
-      contents: "read"
-      id-token: "write"
-      issues: "write"
+      contents: read
+      issues: write
+      checks: write
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
