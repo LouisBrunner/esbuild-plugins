@@ -15,7 +15,7 @@ import (
 	"github.com/evanw/esbuild/pkg/api"
 )
 
-const rawSuffix = "?css-modules-raw"
+const rawSuffix = `?css-modules-raw`
 
 type Options struct {
 	Filter string
@@ -74,7 +74,7 @@ func NewPlugin(opts Options) api.Plugin {
 				return api.OnLoadResult{Contents: &wrapper, Loader: api.LoaderJS}, nil
 			})
 
-			pb.OnResolve(api.OnResolveOptions{Filter: rawSuffix + `$`}, func(args api.OnResolveArgs) (api.OnResolveResult, error) {
+			pb.OnResolve(api.OnResolveOptions{Filter: `\` + rawSuffix + `$`}, func(args api.OnResolveArgs) (api.OnResolveResult, error) {
 				orig := strings.TrimSuffix(args.Path, rawSuffix)
 				return api.OnResolveResult{Path: orig, Namespace: "file"}, nil
 			})

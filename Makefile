@@ -27,18 +27,18 @@ test: download generate
 .PHONY: test
 
 test-ci: download generate
-	go run $(GOFLAGS) gotest.tools/gotestsum --junitfile $(TEST_OUT_DIR)/report.xml -- -coverprofile=$(TEST_OUT_DIR)/coverage.out -v ./...
+	go tool gotestsum --junitfile $(TEST_OUT_DIR)/report.xml -- -coverprofile=$(TEST_OUT_DIR)/coverage.out -v ./...
 .PHONY: test-ci
 
 coverage-ci: download generate
 	go tool cover -html=$(COV_IN_FILE) -o $(COV_OUT_DIR)/coverage.html
-	go run $(GOFLAGS) github.com/t-yuki/gocover-cobertura < $(COV_IN_FILE) > $(COV_OUT_DIR)/cobertura.xml
+	go tool gocover-cobertura < $(COV_IN_FILE) > $(COV_OUT_DIR)/cobertura.xml
 .PHONY: coverage-ci
 
 vet: download generate
 	gofmt -d -e -s .
 	go vet $(GOFLAGS) ./...
-	go run $(GOFLAGS) honnef.co/go/tools/cmd/staticcheck ./...
+	go tool staticcheck ./...
 .PHONY: vet
 
 generate: download

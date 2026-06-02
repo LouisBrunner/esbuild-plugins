@@ -2,6 +2,12 @@ module github.com/LouisBrunner/esbuild-plugins
 
 go 1.25.0
 
+tool (
+	github.com/t-yuki/gocover-cobertura
+	gotest.tools/gotestsum
+	honnef.co/go/tools/cmd/staticcheck
+)
+
 require (
 	github.com/evanw/esbuild v0.28.0
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
