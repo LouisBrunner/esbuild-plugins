@@ -29,7 +29,7 @@ func NewPlugin(opts Options) (*api.Plugin, error) {
 		opts.Command = "npx postcss"
 	}
 	if opts.Loader == nil {
-		opts.Loader = func(path string) api.Loader {
+		opts.Loader = func(_ string) api.Loader {
 			return api.LoaderCSS
 		}
 	}
@@ -44,7 +44,7 @@ func NewPlugin(opts Options) (*api.Plugin, error) {
 		Setup: func(build api.PluginBuild) {
 			build.OnLoad(api.OnLoadOptions{Filter: opts.Filter, Namespace: "file"},
 				func(args api.OnLoadArgs) (api.OnLoadResult, error) {
-					cmd := exec.Command(
+					cmd := exec.Command( // #nosec G204
 						cmdParts[0],
 						append(cmdParts[1:], args.Path)...,
 					)

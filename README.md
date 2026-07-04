@@ -1,6 +1,6 @@
 # esbuild-plugins
 
-A collection of Go plugins for esbuild.
+A collection of Go plugins for esbuild, plus a small `devserver` package for running one.
 
 ## Plugins
 
@@ -81,5 +81,40 @@ func main() {
   if len(result.Errors) > 0 {
     os.Exit(1)
   }
+}
+```
+
+## Packages
+
+### `devserver`
+
+This package provides some boilerplate functions to make a production build or run a dev server.
+
+It exposes:
+
+- `BuildOptions(build api.BuildOptions, isDev bool) api.BuildOptions`: tunes `build` for dev (e.g. inline source map) or production (minified).
+- `Build(opts Options) error`: make a production build, copying extra files from `opts.PublicDir` if set.
+- `Start(ctx context.Context, opts Options) error`: builds, watches and serves until `ctx` is cancelled.
+- `Run(defaults Options)`: flag-parses `-dev`, `-port`, `-open` on top of `defaults`, then calls `Build` or `Start` accordingly, exiting the process on error.
+
+`Options.Logger` (a small `Logger` interface matching `*log.Logger`'s `Printf`/`Fatal`) defaults to `log.New(os.Stderr, "", log.LstdFlags)` when left unset.
+
+```go
+package main
+
+import (
+  "github.com/evanw/esbuild/pkg/api"
+  "github.com/LouisBrunner/esbuild-plugins/pkg/devserver"
+)
+
+func main() {
+  devserver.Run(devserver.Options{
+    Build: api.BuildOptions{
+      EntryPoints: []string{"src/index.tsx"},
+      Bundle:      true,
+    },
+    Output:    "dist",
+    PublicDir: "public",
+  })
 }
 ```
