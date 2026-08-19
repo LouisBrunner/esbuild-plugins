@@ -1,6 +1,6 @@
 module github.com/LouisBrunner/esbuild-plugins
 
-go 1.26.2
+go 1.26.6
 
 tool (
 	github.com/t-yuki/gocover-cobertura
