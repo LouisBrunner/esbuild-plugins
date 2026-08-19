@@ -9,7 +9,7 @@ tool (
 )
 
 require (
-	github.com/evanw/esbuild v0.28.1
+	github.com/evanw/esbuild v0.28.2
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
 )
 
