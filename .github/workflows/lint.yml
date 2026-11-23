@@ -39,6 +39,11 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Setup Just
+        uses: extractions/setup-just@v4.0.0
+        with:
+          just-version: 1.58.0
+
       - name: Set up Go
         uses: actions/setup-go@v7.0.0
         with:
@@ -46,8 +51,7 @@ jobs:
 
       - name: Test
         run: |
-          make test-ci
-          make coverage-ci
+          just test-ci coverage-ci
 
       - name: Publish results
         if: always()
