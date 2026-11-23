@@ -51,7 +51,8 @@ jobs:
 
       - name: Test
         run: |
-          just test-ci coverage-ci
+          just test-ci
+          just coverage-ci
 
       - name: Publish results
         if: always()
